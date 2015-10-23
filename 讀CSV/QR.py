@@ -55,8 +55,8 @@ class TestPaneldis(wx.Panel):
     	# f.close()
         qrcommit(piece11,piece12,dirpath,name)
         tEnd = time.time()
-        print "Success"
-        print " spend  "+str((tEnd - tStart)//1)+"  second"
+        print ("Success")
+        print (" spend  "+str((tEnd - tStart)//1)+"  second")
 
     def __init__(self, parent, log):
         wx.Panel.__init__(self, parent)
@@ -91,31 +91,21 @@ class App(wx.App):
         self.SetTopWindow(self.frame)
         return True
 ###########################################################################
-
-
-
-
 def qrcommit(data1,data2,filenamepath,name):
     for x in range(len(piece11)):
-    	qr = QRCode(version=1, error_correction=ERROR_CORRECT_H,box_size=10,border=4,)
-    	qr.add_data(data1[x].decode('big5'))
-    	qr.make() # Generate the QRCode itself
-    	# im contains a PIL.Image.Image object
-    	im = qr.make_image()
-    	# To save it
-
-        im.save(filenamepath.replace('.csv','\\')+name[x].strip()+'-1.png')
-        print data1[x]
+        qr = QRCode(version=1, error_correction=ERROR_CORRECT_L,box_size=10,border=4)
+        qr.add_data(data1[x].decode('big5'))
+        qr.make()
+        im = qr.make_image()
+        im.save(filenamepath.replace('.csv','\\')+name[x].strip()+'-1.jpg')
+        print (data1[x])
     for x in range(len(piece12)):
-    	qr = QRCode(version=1, error_correction=ERROR_CORRECT_H,box_size=10,border=4,)
-    	qr.add_data(data2[x].decode('big5'))
-    	qr.make() # Generate the QRCode itself
-    	# im contains a PIL.Image.Image object
-    	im = qr.make_image()
-    	# To save it
-        im.save(filenamepath.replace('.csv','\\')+name[x].strip()+'-2.png')
-        print data2[x]
-    	# im.save(filenamepath[0:filenamepath.rfind('/')+1].decode('UTF-8').strip()+x.decode('UTF-8').strip()+'.png')
+        qr = QRCode(version=1, error_correction=ERROR_CORRECT_L,box_size=10,border=4)
+        qr.add_data(data2[x].decode('big5'))
+        qr.make()
+        im = qr.make_image()
+        im.save(filenamepath.replace('.csv','\\')+name[x].strip()+'-2.jpg')
+        print (data2[x])
 if __name__ == '__main__':
     app = App()
     app.MainLoop()
