@@ -48,10 +48,22 @@ class TestPaneldis(wx.Panel):
         ise = os.path.exists(dirpath.replace('.csv',''))
         if not ise:
             os.mkdir(dirpath.replace('.csv',''))
+<<<<<<< HEAD
         qrcommit(piece11,piece12,dirpath,name)
         tEnd = time.time()
         print "Success"
         print " spend  "+str((tEnd - tStart)//1)+"  second"
+=======
+    	# f = open(dirpath,'r')
+    	# for line in f.readlines():
+    	#     print line
+        #     piece11.append(line)
+    	# f.close()
+        qrcommit(piece11,piece12,dirpath,name)
+        tEnd = time.time()
+        print ("Success")
+        print (" spend  "+str((tEnd - tStart)//1)+"  second")
+>>>>>>> origin/master
 
     def __init__(self, parent, log):
         wx.Panel.__init__(self, parent)
@@ -86,6 +98,7 @@ class App(wx.App):
         self.SetTopWindow(self.frame)
         return True
 ###########################################################################
+<<<<<<< HEAD
 
 
 
@@ -111,6 +124,23 @@ def qrcommit(data1,data2,filenamepath,name):
         im.save(filenamepath.replace('.csv','\\')+name[x].strip()+'-2.jpg')
         print data2[x]
     	# im.save(filenamepath[0:filenamepath.rfind('/')+1].decode('UTF-8').strip()+x.decode('UTF-8').strip()+'.png')
+=======
+def qrcommit(data1,data2,filenamepath,name):
+    for x in range(len(piece11)):
+        qr = QRCode(version=1, error_correction=ERROR_CORRECT_L,box_size=10,border=4)
+        qr.add_data(data1[x].decode('big5'))
+        qr.make()
+        im = qr.make_image()
+        im.save(filenamepath.replace('.csv','\\')+name[x].strip()+'-1.jpg')
+        print (data1[x])
+    for x in range(len(piece12)):
+        qr = QRCode(version=1, error_correction=ERROR_CORRECT_L,box_size=10,border=4)
+        qr.add_data(data2[x].decode('big5'))
+        qr.make()
+        im = qr.make_image()
+        im.save(filenamepath.replace('.csv','\\')+name[x].strip()+'-2.jpg')
+        print (data2[x])
+>>>>>>> origin/master
 if __name__ == '__main__':
     app = App()
     app.MainLoop()
